@@ -1,0 +1,19 @@
+/* CSS declarations go here */
+h3 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+p {
+	display: inline-block;
+	margin: 2px 5px;
+}
+
+div {
+	height: auto;
+}
+
+.name {
+	box-sizing: border-box;
+	width: 100px;
+}

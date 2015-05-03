@@ -1,0 +1,39 @@
+<head>
+  <title>quidstats</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>Powerpuffs Week 3</h1>
+  
+  {{> quafflePlayers}}
+  {{> snitchPlayers}}
+</body>
+
+<template name="quafflePlayers">
+<div id="quafflePlayers">
+  <h3>Quaffle Points</h3>
+  	<div id="quafflePlayerList">
+  		{{displayQuafflePlayers}}
+	</div>
+</div>
+{{> addNewQuafflePlayer}}
+</template>
+
+<template name="snitchPlayers">
+<div id="snitchPlayers">
+  <h3>Snitch Grabs</h3>
+  	<div id="snitchPlayerList">
+  		{{displaySnitchPlayers}}
+	</div>
+</div>
+{{> addNewSnitchPlayer}}
+</template>
+
+<template name="addNewQuafflePlayer">
+	<button class="addQuafflePlayer">Add New Player</button>
+</template>
+
+<template name="addNewSnitchPlayer">
+	<button class="addSnitchPlayer">Add New Player</button>
+</template>
