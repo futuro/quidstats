@@ -64,7 +64,10 @@ if (Meteor.isClient) {
   });
 
   function newPlayer(name, ball) {
-    // add name validation (make sure it's not null)
+    // if user presses "cancel" on name entry
+    if (name == null) {
+      return;
+    }
 
     var match = false;
     playerList.forEach(function(entry) {
@@ -112,6 +115,7 @@ if (Meteor.isClient) {
     playerList.forEach(function(entry) {
       if (entry.quaffleDisplay) {
         var elem = document.createElement("div");
+        elem.className = "player";
         elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
                         + quaffleIncrement 
                         + "<p class=\"points\">" +entry.quafflePoints; + "</p>";
@@ -131,6 +135,7 @@ if (Meteor.isClient) {
     playerList.forEach(function(entry) {
       if (entry.snitchDisplay) {
         var elem = document.createElement("div");
+        elem.className = "player";
         elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
                         + snitchIncrement 
                         + "<p class=\"points\">" +entry.snitchGrabs; + "</p>";
