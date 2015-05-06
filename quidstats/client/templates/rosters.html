@@ -1,10 +1,17 @@
 <template name="rosters">
 
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Team Rosters</title>
-    </head>
-    <body>
-    So many teams!
-    </body>
+    <div class="newRosters">
+        So many teams!
+        <form class="new-roster">
+            <input type="text" name="text" placeholder="Type to add a new roster" />
+        </form>
+    </div>
+
+    <div class="rosters">
+        <ul class="nav nav-pills nav-stacked">
+          {{#each Teams}}
+              <li>{{name}}</li>
+          {{/each}}
+        </ul>
+    </div>
 </template>
