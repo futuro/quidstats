@@ -1,5 +1,3 @@
-Teams = new Mongo.Collection("teams");
-
 Template.rosters.addTeam = function (name) {
     Teams.insert({
         name:name,
@@ -8,19 +6,18 @@ Template.rosters.addTeam = function (name) {
 };
 Template.rosters.events({
     'submit .new-roster': function(event){
-        var name = event.target.text.value;
+        var teamname = event.target.text.value;
         //Meteor.call("addTeam", name);
-        Template.rosters.addTeam(name);
-        event.target.text.content = "";
+        //Template.rosters.addTeam(name);
+        Meteor.call("createTeam", teamname);
+        event.target.text.value = "";
         return false;
     }
 });
-
-//Meteor.methods({
-//    addTeam: function(text){
-//        Teams.insert({
-//            name:text,
-//            createdAt: new Date()
-//        })
-//    }
-//});
+Template.rosters.helpers({
+    teams: function () {
+        // We can use subscriptions if we want to split client and server
+        // apart
+        return Teamrosters.find();
+    }
+});

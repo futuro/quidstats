@@ -1,7 +1,6 @@
 <template name="rosters">
 
     <div class="newRosters">
-        So many teams!
         <form class="new-roster">
             <input type="text" name="text" placeholder="Type to add a new roster" />
         </form>
@@ -9,9 +8,13 @@
 
     <div class="rosters">
         <ul class="nav nav-pills nav-stacked">
-          {{#each Teams}}
-              <li>{{name}}</li>
+          {{#each teams}}
+              {{> teamlist}}
           {{/each}}
         </ul>
     </div>
+</template>
+
+<template name="teamlist">
+    <li><a href="{{pathFor route='roster'}}/{{name}}">{{name}}</a></li>
 </template>
