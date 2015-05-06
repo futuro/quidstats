@@ -21,3 +21,18 @@ Template.rosters.helpers({
         return Teamrosters.find();
     }
 });
+
+Template.teamroster.helpers({
+    players: function () {
+        return Teamrosters.findOne({name: this.name}, {fields: {players:1}}).players;
+    }
+});
+
+Template.teamroster.events({
+    'submit .new-players': function (event) {
+        var playername = event.target.text.value;
+        Meteor.call('insertPlayer', this.name, playername);
+        event.target.text.value = '';
+        return false;
+    }
+});

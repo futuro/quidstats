@@ -16,5 +16,20 @@
 </template>
 
 <template name="teamlist">
-    <li><a href="{{pathFor route='roster'}}/{{name}}">{{name}}</a></li>
+    <li><a href="{{pathFor route='rosters'}}/{{name}}">{{name}}</a></li>
+</template>
+
+<template name="teamroster">
+    <h2>{{name}}</h2>
+    <div class="newPlayers">
+        <form class="new-players">
+            <input type="text" name="text" placeholder="Type to add a new player" />
+        </form>
+    </div>
+
+    <ul>
+      {{#each players}}
+        <li>{{playername}}</li>
+      {{/each}}
+    </ul>
 </template>

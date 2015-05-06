@@ -4,9 +4,11 @@ Router.map(function (){
     this.route('oldgames');
     this.route('rosters');
     this.route('summary');
-    this.route('roster/:_teamname', function () {
-        this.render('roster', {
-            data: _teamname
+    this.route('rosters/:_teamname', function () {
+        this.render('teamroster', {
+            data: function () {
+                return Teamrosters.findOne({name: this.params._teamname});
+            }
         })
     });
 });

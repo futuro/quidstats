@@ -5,14 +5,15 @@ Meteor.methods({
         check(name, String);
         var id = Teamrosters.insert({
             name: name,
-            createdAt: new Date()
+            createdAt: new Date(),
+            players : []
         });
         return id;
     },
     insertPlayer: function (teamname, player) {
         check(teamname, String);
         check(player, String);
-        Teamrosters.update({name: teamname}, {$addToSet: {players: player}});
+        Teamrosters.update({name: teamname}, {$addToSet: {players: {playername: player}}});
     },
     getTeams: function () {
         return Teamrosters.find();
