@@ -1,6 +1,6 @@
 Router.map(function (){
     this.route('home', {path: '/'});
-    this.route('/quidstats', function () {
-        this.render('quidstats')
-    });
+    this.route('quidstats');
+    this.route('oldgames');
+    this.route('rosters');
 });
