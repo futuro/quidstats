@@ -3,4 +3,5 @@ Router.map(function (){
     this.route('quidstats');
     this.route('oldgames');
     this.route('rosters');
+    this.route('summary');
 });

@@ -5,6 +5,7 @@
     </head>
 
     <body>
+    {{> export}}
     <h1>Powerpuffs Week 3</h1>
 
     {{> quafflePlayers}}
@@ -41,4 +42,8 @@
 
 <template name="addNewSnitchPlayer">
     <button class="btn btn-primary addSnitchPlayer">Add New Player</button>
+</template>
+
+<template name="export">
+    <button class="save_end"><a href={{pathFor route='summary'}}>Save + End</a></button>
 </template>
