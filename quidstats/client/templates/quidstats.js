@@ -1,7 +1,12 @@
+// Teams db has "name" : [players]
+Teams = new Mongo.Collection("teams");
+// Games has date : <date>,  team : <string>
+// players : {playerName : {quaffle : <int>, snitch: <int>}, playerName: {..}}}
+Games = new Mongo.Collection("games");
 
 
 if (Meteor.isClient) {
-  
+  //Meteor.subscribe("teams");
   var quaffleIncrement = "<button class=\"increment\">+10</button>";
   var snitchIncrement = "<button class=\"increment\">+30</button>";
 
