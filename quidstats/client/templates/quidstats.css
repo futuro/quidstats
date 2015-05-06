@@ -7,6 +7,10 @@ div {
 	height: auto;
 }
 
+h1 {
+	margin-left: 5px;
+}
+
 h3 {
 	margin-top: 2px;
 	margin-bottom: 2px;
@@ -17,13 +21,20 @@ p {
 	margin: 2px 5px;
 }
 
+.addQuafflePlayer {
+	margin-left: 10px;
+}
+.addSnitchPlayer {
+	margin-left: 10px;
+}
+
 .increment {
 	height: 100%;
 	width: 80px;
 }
 
 .name {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	box-sizing: border-box;
 	display: inline-block;
 	max-width: 170px;
@@ -39,4 +50,14 @@ p {
 	margin-left: 10px;
 	text-align: right;
 	width: 20px;
+}
+
+#quafflePlayers{
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+#snitchPlayers{
+	margin-left: 10px;
+	margin-top: 10px;
 }
