@@ -1,0 +1,14 @@
+<template name="pickteam">
+    <h1>Pick a team</h1>
+    <div class="rosters">
+        <ul class="nav nav-pills nav-stacked">
+          {{#each teams}}
+            {{> teamlist}}
+          {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="teamlist">
+    <li><a href="{{pathFor route='quidstats'}}/{{name}}">{{name}}</a></li>
+</template>
