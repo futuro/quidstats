@@ -6,10 +6,10 @@ Template.exportSummaryData.events({
 
 Template.summary.helpers({
 	// this isn't being used atm
-    games: function () {
+    games: function (sname) {
         // We can use subscriptions if we want to split client and server
         // apart
-        gameSummary = GameSummaries.findOne();
+        var gameSummary = Meteor.call('findGame', sname);
         return gameSummary['players'];
     }
 });

@@ -1,6 +1,6 @@
 <template name="quidstats">
     <head>
-        <title>quidstats</title>
+        <title>QuidStats</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </head>
 
@@ -45,5 +45,5 @@
 </template>
 
 <template name="goToSummary">
-    <a href="{{pathFor route='summary'}}/{{sessionName}}" class="save_end">Save + End</a>
+    <a href="{{pathFor route='summary'}}/{{teamname}}" onclick="{{redirectToSummary teamname}}" class="save_end">Save + End</a>
 </template>

@@ -1,5 +1,5 @@
 // Teams db has "name" : [players]
-//Teams = new Mongo.Collection("teams");
+// Teams = new Mongo.Collection("teams");
 // Games has date : <date>,  team : <string>
 // players : {playerName : {quaffle : <int>, snitch: <int>}, playerName: {..}}}
 // Games = new Mongo.Collection("games");
@@ -8,10 +8,19 @@
 if (Meteor.isClient) {
   //Meteor.subscribe("teams");
   var date = new Date();
-  var teamName = document.getElementById("teamNameHeader").text(); // gotta be a better way to do this
-  var sessionName = teamName; // this should be its own thing later
+
+  /*=============================================
+    Convenient HTML Strings
+    - probably don't need these if using
+      Meteor correctly in the future
+  ==============================================*/
   var quaffleIncrement = "<button class=\"increment\">+10</button>";
   var snitchIncrement = "<button class=\"increment\">+30</button>";
+
+  /*===============================================
+    Players Array
+    - preferably, update to use mongo Collection 
+  ================================================*/
 
   var playerList = new Array();
 
@@ -68,14 +77,19 @@ if (Meteor.isClient) {
   ==============================================*/
   Template.goToSummary.events({
     'click .save_end': function (e) {
-      // gonna have to remove clearCollection later
-      Meteor.call('clearCollection');
-      Meteor.call('createGame', sessionName, teamName, playerList);
+      // // gonna have to remove clearCollection later
+      // Meteor.call('clearCollection');
+      // Meteor.call('createGame', sessionName, teamName, playerList);
     }
   });
 
   Template.goToSummary.helpers({
-    sessionName: sessionName
+    redirectToSummary: function(a) {
+
+      Meteor.call('clearCollection');
+      Meteor.call('createGame', a, a, playerList);
+    }
+
   });
 
   /*=============================================

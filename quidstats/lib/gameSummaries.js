@@ -6,10 +6,10 @@ Meteor.methods({
       Adds a new "Game" to the GameSummaries database
     ==================================================*/
 	createGame: function (sessionName, teamName, roster) {
-        if (GameSummaries.findOne({session: {$eq: sessionName}})) {
-            prompt("A session with that name already exists! Please enter a new name: ");
-            return false;
-        }
+        // if (GameSummaries.findOne({session: {$eq: sessionName}})) {
+        //     prompt("A session with that name already exists! Please enter a new name: ");
+        //     return false;
+        // }
 
         GameSummaries.insert({
         	session: sessionName,
@@ -25,5 +25,10 @@ Meteor.methods({
     ===================================================*/
     clearCollection: function() {
         GameSummaries.remove({});
+    },
+
+    findGame: function(sName) {
+        var game = GameSummaries.findOne();
+        return game;
     }
 });
