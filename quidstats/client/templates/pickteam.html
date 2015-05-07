@@ -3,12 +3,12 @@
     <div class="rosters">
         <ul class="nav nav-pills nav-stacked">
           {{#each teams}}
-            {{> teamlist}}
+            {{> newgamelist}}
           {{/each}}
         </ul>
     </div>
 </template>
 
-<template name="teamlist">
+<template name="newgamelist">
     <li><a href="{{pathFor route='quidstats'}}/{{name}}">{{name}}</a></li>
 </template>
