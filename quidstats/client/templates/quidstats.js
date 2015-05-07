@@ -2,11 +2,14 @@
 //Teams = new Mongo.Collection("teams");
 // Games has date : <date>,  team : <string>
 // players : {playerName : {quaffle : <int>, snitch: <int>}, playerName: {..}}}
-Games = new Mongo.Collection("games");
+// Games = new Mongo.Collection("games");
 
 
 if (Meteor.isClient) {
   //Meteor.subscribe("teams");
+  var date = new Date();
+  var sessionName = "Powerpuffs";
+  var teamName = "Placeholder Team Name";
   var quaffleIncrement = "<button class=\"increment\">+10</button>";
   var snitchIncrement = "<button class=\"increment\">+30</button>";
 
@@ -48,6 +51,18 @@ if (Meteor.isClient) {
       newPlayer(name, "snitch");
       displaySnitchPlayers();
     }
+  });
+
+  Template.goToSummary.events({
+    'click .save_end': function (e) {
+      // gonna have to remove clearCollection later
+      Meteor.call('clearCollection');
+      Meteor.call('createGame', sessionName, teamName, playerList);
+    }
+  });
+
+  Template.goToSummary.helpers({
+    sessionName: sessionName
   });
 
   Template.quafflePlayers.events({
@@ -148,6 +163,7 @@ if (Meteor.isClient) {
       }
     });
   }
+
 }
 
 if (Meteor.isServer) {

@@ -11,4 +11,11 @@ Router.map(function (){
             }
         })
     });
+    this.route('summary/:_sessionname', function () {
+        this.render('summary', {
+            data: function () {
+                return GameSummaries.findOne({session: this.params._sessionname});
+            }
+        })
+    });
 });

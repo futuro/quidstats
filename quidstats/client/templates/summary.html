@@ -1,11 +1,12 @@
 <template name="summary">
-	<h2>Stats Summary</h2>
-	<ul class="list-group"><!-- 
-		{{#each Games.thisGame.players}}
+	<h2>Stats Summary for {{team}} on {{date}}</h2>
+	<ul class="list-group">
+		{{#each players}}
 		<li class="list-group-item">
-			{{playerName}}
-			<span class="badge quaffle">{{quaffle}}</span>
-			<span class="badge snitch">{{snitch}}</span>
-		</li> -->
+			{{name}}
+			<span class="badge quaffle">{{quafflePoints}}</span>
+			<span class="badge snitch">{{snitchGrabs}}</span>
+		</li>
+		{{/each}}
 	</ul>
 </template>
