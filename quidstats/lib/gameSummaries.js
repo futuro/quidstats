@@ -1,6 +1,10 @@
 GameSummaries = new Mongo.Collection("games");
 
 Meteor.methods({
+
+    /*=================================================
+      Adds a new "Game" to the GameSummaries database
+    ==================================================*/
 	createGame: function (sessionName, teamName, roster) {
         if (GameSummaries.findOne({session: {$eq: sessionName}})) {
             prompt("A session with that name already exists! Please enter a new name: ");
@@ -16,17 +20,10 @@ Meteor.methods({
         return true;
     },
 
+    /*==================================================
+      Deletes all documents in GameSummaries collection
+    ===================================================*/
     clearCollection: function() {
-        // deletes all entries
         GameSummaries.remove({});
     }
-
-    // getGame: function(gameID) {
-    // 	GameSummaries.find(_id: {$eq: gameID});
-    // },
-
-    // getGamePlayers: function(id) {
-    // 	var game = getGame(id);
-    // 	return game.players;
-    // }
 });

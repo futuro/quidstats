@@ -8,12 +8,16 @@
 if (Meteor.isClient) {
   //Meteor.subscribe("teams");
   var date = new Date();
-  var sessionName = "Powerpuffs";
-  var teamName = "Placeholder Team Name";
+  var teamName = document.getElementById("teamNameHeader").text(); // gotta be a better way to do this
+  var sessionName = teamName; // this should be its own thing later
   var quaffleIncrement = "<button class=\"increment\">+10</button>";
   var snitchIncrement = "<button class=\"increment\">+30</button>";
 
   var playerList = new Array();
+
+  /*=============================================
+    Player Object Constructors
+  ==============================================*/
   function Player(name) {
     this.name = name;
     this.quafflePoints = 0;
@@ -37,6 +41,9 @@ if (Meteor.isClient) {
     }
   }
 
+  /*=============================================
+    Add New Quaffle Player
+  ==============================================*/
   Template.addNewQuafflePlayer.events({
     'click .addQuafflePlayer': function () {
       var name = prompt("New Player Name: ");
@@ -45,6 +52,9 @@ if (Meteor.isClient) {
     }
   });
 
+  /*=============================================
+    Add New Snitch Player
+  ==============================================*/
   Template.addNewSnitchPlayer.events({
     'click .addSnitchPlayer': function () {
       var name = prompt("New Player Name: ");
@@ -53,6 +63,9 @@ if (Meteor.isClient) {
     }
   });
 
+  /*=============================================
+    Go To Summary Page
+  ==============================================*/
   Template.goToSummary.events({
     'click .save_end': function (e) {
       // gonna have to remove clearCollection later
@@ -65,6 +78,9 @@ if (Meteor.isClient) {
     sessionName: sessionName
   });
 
+  /*=============================================
+    Increment Quaffle Points
+  ==============================================*/
   Template.quafflePlayers.events({
     'click .increment': function (e) {
       var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
@@ -74,6 +90,10 @@ if (Meteor.isClient) {
     }
   });
 
+
+  /*=============================================
+    Increment Snitch Grabs
+  ==============================================*/
   Template.snitchPlayers.events({
     'click .increment': function (e) {
       var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
@@ -83,6 +103,9 @@ if (Meteor.isClient) {
     }
   });
 
+  /*=============================================
+    FUNCTIONS
+  ==============================================*/
   function newPlayer(name, ball) {
     // if user presses "cancel" on name entry
     if (name == null) {
@@ -151,7 +174,6 @@ if (Meteor.isClient) {
         div.removeChild(div.firstChild);
     }
 
-
     playerList.forEach(function(entry) {
       if (entry.snitchDisplay) {
         var elem = document.createElement("div");
@@ -163,7 +185,6 @@ if (Meteor.isClient) {
       }
     });
   }
-
 }
 
 if (Meteor.isServer) {
