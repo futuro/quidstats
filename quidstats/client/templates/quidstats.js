@@ -89,7 +89,7 @@ if (Meteor.isClient) {
       Meteor.call('clearCollection');
       Meteor.call('createGame', a, a, playerList);
     }
-
+a
   });
 
   /*=============================================
