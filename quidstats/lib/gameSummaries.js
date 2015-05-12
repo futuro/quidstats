@@ -15,8 +15,8 @@ Meteor.methods({
             session: sessionName,
             date: new Date(),
             team: teamName,
-            quafflePlayers: {},
-            snitchPlayers: {},
+            quafflePlayers: [],
+            snitchPlayers: [],
             players: roster
         });
         return id;
