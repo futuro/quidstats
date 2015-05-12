@@ -11,15 +11,19 @@ Meteor.methods({
         //     return false;
         // }
 
-        GameSummaries.insert({
-        	session: sessionName,
+        var id = GameSummaries.insert({
+            session: sessionName,
             date: new Date(),
             team: teamName,
             quafflePlayers: {},
             snitchPlayers: {},
             players: roster
         });
-        return true;
+        return id;
+    },
+    addQuafflePlayer: function(sessionname, playername){
+        GameSummaries.update({session: sessionname},
+            {$addToSet: {quafflePlayers: {name: playername, score: 0}}});
     },
 
     /*==================================================

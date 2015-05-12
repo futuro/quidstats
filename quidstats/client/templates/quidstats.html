@@ -1,11 +1,9 @@
 <template name="quidstats">
-    {{> goToSummary}}
+  {{> goToSummary}}
     <!-- Session Name, not team name. dis gotta be changed -->
     <h1 id="sessionName">{{teamname}}</h1>
-
-    {{> quafflePlayers}}
-    {{> snitchPlayers}}
-
+  {{> quafflePlayers}}
+  {{> snitchPlayers}}
 </template>
 
 <template name="quafflePlayers">
@@ -16,7 +14,7 @@
 
         <div id="quafflePlayerList">
           {{#each quafflePlayers}}
-            {{> displayQuafflePlayers}}
+            {{> displayQuafflePlayer}}
           {{/each}}
         </div>
 
@@ -24,8 +22,10 @@
     {{> addNewQuafflePlayer}}
 </template>
 
-<template name="displayQuafflePlayers">
-
+<template name="displayQuafflePlayer">
+    <div class="player">
+        <p class="name">{{name}}</p> <button class="btn btn-primary">+10</button>
+    </div>
 </template>
 
 <template name="snitchPlayers">
@@ -47,5 +47,5 @@
 </template>
 
 <template name="goToSummary">
-    <a href="{{pathFor route='summary'}}/{{teamname}}" onclick="{{redirectToSummary teamname}}" class="save_end">Save + End</a>
+    <a href="{{pathFor route='summary'}}/{{teamname}}" class="save_end">Save + End</a>
 </template>

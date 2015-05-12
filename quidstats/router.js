@@ -31,7 +31,6 @@ Router.map(function (){
         this.render('quidstats', {
             data: {
                 teamname : this.params._teamname
-
             }
         })
     });

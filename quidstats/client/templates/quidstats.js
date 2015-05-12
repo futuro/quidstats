@@ -8,16 +8,23 @@ Template.quafflePlayers.helpers({
     quafflePlayers: function(){
         return GameSummaries.find({}, {fields: {quafflePlayers:1}});
     }
-})
+});
+
+Template.snitchPlayers.helpers({
+    snitchPlayers: function () {
+        return GameSummaries.find({}, {fields: {snitchPlayers:1}});
+    }
+});
+
+Template.quidstats.helpers({
+    printsesh: function () {
+        var seshid = Session.get('currSeshId');
+        console.log(seshid);
+        return seshid;
+    }
+});
 
 if (Meteor.isClient) {
-
-  /*===============================================
-    Players Array
-    - preferably, update to use mongo Collection 
-  ================================================*/
-
-  var playerList = new Array();
 
   /*=============================================
     Player Object Constructors

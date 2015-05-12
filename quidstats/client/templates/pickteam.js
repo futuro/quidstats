@@ -9,7 +9,17 @@ Template.pickteam.helpers({
 Template.newgamelist.events({
     'click .newgame': function (event) {
         console.log(event);
-        var teamname = event.target.textContent;
-        Meteor.call('createGame', new Date(), teamname, []);
+        var teamname = event.target.textContent.trim(),
+            date = new Date();
+        Meteor.call('createGame', date, teamname, [],
+            function (error, result) {
+                if (error) {
+                    console.log(error);
+                    Session.set('currSeshId', "Couldn't set sesh id")
+                } else {
+                    Session.set('currSeshId', result);
+                }
+            }
+        );
     }
-})
+});
