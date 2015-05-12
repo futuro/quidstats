@@ -9,33 +9,41 @@
 <template name="quafflePlayers">
     <div id="quafflePlayers">
         <h3>Quaffle Points</h3>
-        <!-- for each quaffle player in db, display -->
-        <!-- previously buttons were of class "increment" but idk if we need that still -->
-
         <div id="quafflePlayerList">
           {{#each quafflePlayers}}
             {{> displayQuafflePlayer}}
           {{/each}}
         </div>
-
     </div>
     {{> addNewQuafflePlayer}}
 </template>
 
 <template name="displayQuafflePlayer">
-    <div class="player">
-        <p class="name">{{name}}</p> <button class="btn btn-primary">+10</button>
-    </div>
+    {{#if name}}
+        <div class="player">
+            <p class="name">{{name}}</p> <button class="btn btn-primary">+10</button>
+        </div>
+    {{/if}}
 </template>
 
 <template name="snitchPlayers">
     <div id="snitchPlayers">
         <h3>Snitch Grabs</h3>
-
-        <!-- for each snitch player in db, display -->
-        <!-- previously buttons were of class "increment" but idk if we need that still -->
+        <div id="snitchPlayerList">
+          {{#each snitchPlayers}}
+            {{> displaySnitchPlayer}}
+          {{/each}}
+        </div>
     </div>
     {{> addNewSnitchPlayer}}
+</template>
+
+<template name="displaySnitchPlayer">
+  {{#if name}}
+      <div class="player">
+          <p class="name">{{name}}</p> <button class="btn btn-primary">+10</button>
+      </div>
+  {{/if}}
 </template>
 
 <template name="addNewQuafflePlayer">

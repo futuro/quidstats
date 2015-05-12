@@ -6,13 +6,15 @@
 
 Template.quafflePlayers.helpers({
     quafflePlayers: function(){
-        return GameSummaries.find({}, {fields: {quafflePlayers:1}});
+        var seshid = Session.get('currSeshId');
+        return GameSummaries.find({"_id":seshid}, {fields: {quafflePlayers:1}});
     }
 });
 
 Template.snitchPlayers.helpers({
     snitchPlayers: function () {
-        return GameSummaries.find({}, {fields: {snitchPlayers:1}});
+        var seshid = Session.get('currSeshId');
+        return GameSummaries.find({"_id":seshid}, {fields: {snitchPlayers:1}});
     }
 });
 
