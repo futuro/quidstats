@@ -6,7 +6,8 @@
 
     <body>
     {{> goToSummary}}
-    <h1 id="teamNameHeader">{{teamname}}</h1>
+    <!-- Session Name, not team name. dis gotta be changed -->
+    <h1 id="sessionName">{{teamname}}</h1>
 
     {{> quafflePlayers}}
     {{> snitchPlayers}}
@@ -17,10 +18,9 @@
 <template name="quafflePlayers">
     <div id="quafflePlayers">
         <h3>Quaffle Points</h3>
+        <!-- for each quaffle player in db, display -->
+        <!-- previously buttons were of class "increment" but idk if we need that still -->
 
-        <div id="quafflePlayerList">
-            {{displayQuafflePlayers}}
-        </div>
     </div>
     {{> addNewQuafflePlayer}}
 </template>
@@ -29,9 +29,8 @@
     <div id="snitchPlayers">
         <h3>Snitch Grabs</h3>
 
-        <div id="snitchPlayerList">
-            {{displaySnitchPlayers}}
-        </div>
+        <!-- for each snitch player in db, display -->
+        <!-- previously buttons were of class "increment" but idk if we need that still -->
     </div>
     {{> addNewSnitchPlayer}}
 </template>
