@@ -1,5 +1,9 @@
 Router.configure({
-    layoutTemplate: 'layout'
+    layoutTemplate: 'layout',
+    onBeforeAction: function () {
+        document.title = 'Quidstats';
+        this.next();
+    }
 });
 
 Router.map(function (){
