@@ -9,14 +9,6 @@ if (Meteor.isClient) {
   //Meteor.subscribe("teams");
   var date = new Date();
 
-  /*=============================================
-    Convenient HTML Strings
-    - probably don't need these if using
-      Meteor correctly in the future
-  ==============================================*/
-  var quaffleIncrement = "<button class=\"increment\">+10</button>";
-  var snitchIncrement = "<button class=\"increment\">+30</button>";
-
   /*===============================================
     Players Array
     - preferably, update to use mongo Collection 
@@ -26,6 +18,7 @@ if (Meteor.isClient) {
 
   /*=============================================
     Player Object Constructors
+    - prolly don't need this shit?
   ==============================================*/
   function Player(name) {
     this.name = name;
@@ -57,7 +50,6 @@ if (Meteor.isClient) {
     'click .addQuafflePlayer': function () {
       var name = prompt("New Player Name: ");
       newPlayer(name, "quaffle");
-      displayQuafflePlayers();
     }
   });
 
@@ -68,24 +60,16 @@ if (Meteor.isClient) {
     'click .addSnitchPlayer': function () {
       var name = prompt("New Player Name: ");
       newPlayer(name, "snitch");
-      displaySnitchPlayers();
     }
   });
 
   /*=============================================
     Go To Summary Page
   ==============================================*/
-  Template.goToSummary.events({
-    'click .save_end': function (e) {
-      // // gonna have to remove clearCollection later
-      // Meteor.call('clearCollection');
-      // Meteor.call('createGame', sessionName, teamName, playerList);
-    }
-  });
 
   Template.goToSummary.helpers({
     redirectToSummary: function(a) {
-
+      // TODO: update this shit somehow
       Meteor.call('clearCollection');
       Meteor.call('createGame', a, a, playerList);
     }
@@ -97,10 +81,9 @@ if (Meteor.isClient) {
   ==============================================*/
   Template.quafflePlayers.events({
     'click .increment': function (e) {
+      // TODO: might be a better/more secure way to get the player name
       var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
-      
       incrementPlayer(name, "quaffle");
-      displayQuafflePlayers();
     }
   });
 
@@ -110,10 +93,9 @@ if (Meteor.isClient) {
   ==============================================*/
   Template.snitchPlayers.events({
     'click .increment': function (e) {
+      // TODO: might be a better/more secure way to get the player name
       var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
-      
       incrementPlayer(name, "snitch");
-      displaySnitchPlayers();
     }
   });
 
@@ -126,79 +108,16 @@ if (Meteor.isClient) {
       return;
     }
 
-    var match = false;
-    playerList.forEach(function(entry) {
-      // need error message if player tries to add player that exists in list already
-      if (name == entry.name) {
-        match = true;
-        if (ball == "quaffle") {
-          entry.quaffleDisplay = true;
-        }
-        else if (ball == "snitch") {
-          entry.snitchDisplay = true;
-        }
-        return;
-      }
-    });
-
-    if (!match) {
-      var newPlayer = new Player(name, ball);
-      playerList.push(newPlayer);
-    }
+    // TODO:
+    // if player name ! in db, add them
+    // else tell user they're a dumbass
   }
 
   function incrementPlayer(name, ball) {
-    playerList.forEach(function(entry) {
-      if (name == entry.name) {
-        if (ball == "quaffle") {
-          entry.quafflePoints += 10;
-        }
-        else if (ball == "snitch") {
-          entry.snitchGrabs += 1;
-        }
-        return;
-      }
-    });
+    // TODO:
+    // increment user stat (of ball) in db
   }
 
-  function displayQuafflePlayers() {
-    // document.getElementById("quafflePlayerList").innerHTML = ""; // this didn't work, maybe
-    // remove all names (fresh start)
-    var div = document.getElementById("quafflePlayerList");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    playerList.forEach(function(entry) {
-      if (entry.quaffleDisplay) {
-        var elem = document.createElement("div");
-        elem.className = "player";
-        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
-                        + quaffleIncrement 
-                        + "<p class=\"points\">" +entry.quafflePoints; + "</p>";
-        document.getElementById("quafflePlayerList").appendChild(elem);
-      }
-    });
-  }
-
-  function displaySnitchPlayers() {
-    // document.getElementById("snitchPlayerList").innerHTML = "";
-    var div = document.getElementById("snitchPlayerList");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    playerList.forEach(function(entry) {
-      if (entry.snitchDisplay) {
-        var elem = document.createElement("div");
-        elem.className = "player";
-        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
-                        + snitchIncrement 
-                        + "<p class=\"points\">" +entry.snitchGrabs; + "</p>";
-        document.getElementById("snitchPlayerList").appendChild(elem);
-      }
-    });
-  }
 }
 
 if (Meteor.isServer) {
