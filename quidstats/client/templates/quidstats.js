@@ -4,10 +4,13 @@
 // players : {playerName : {quaffle : <int>, snitch: <int>}, playerName: {..}}}
 // Games = new Mongo.Collection("games");
 
+Template.quafflePlayers.helpers({
+    quafflePlayers: function(){
+        return GameSummaries.find({}, {fields: {quafflePlayers:1}});
+    }
+})
 
 if (Meteor.isClient) {
-  //Meteor.subscribe("teams");
-  var date = new Date();
 
   /*===============================================
     Players Array
@@ -118,10 +121,42 @@ if (Meteor.isClient) {
     // increment user stat (of ball) in db
   }
 
-}
+  function displayQuafflePlayers() {
+    // document.getElementById("quafflePlayerList").innerHTML = ""; // this didn't work, maybe
+    // remove all names (fresh start)
+    var div = document.getElementById("quafflePlayerList");
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+    playerList.forEach(function(entry) {
+      if (entry.quaffleDisplay) {
+        var elem = document.createElement("div");
+        elem.className = "player";
+        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
+                        + quaffleIncrement 
+                        + "<p class=\"points\">" +entry.quafflePoints; + "</p>";
+        document.getElementById("quafflePlayerList").appendChild(elem);
+      }
+    });
+  }
+
+  function displaySnitchPlayers() {
+    // document.getElementById("snitchPlayerList").innerHTML = "";
+    var div = document.getElementById("snitchPlayerList");
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+
+    playerList.forEach(function(entry) {
+      if (entry.snitchDisplay) {
+        var elem = document.createElement("div");
+        elem.className = "player";
+        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
+                        + snitchIncrement 
+                        + "<p class=\"points\">" +entry.snitchGrabs; + "</p>";
+        document.getElementById("snitchPlayerList").appendChild(elem);
+      }
+    });
+  }
 }

@@ -5,3 +5,11 @@ Template.pickteam.helpers({
         return Teamrosters.find();
     }
 });
+
+Template.newgamelist.events({
+    'click .newgame': function (event) {
+        console.log(event);
+        var teamname = event.target.textContent;
+        Meteor.call('createGame', new Date(), teamname, []);
+    }
+})

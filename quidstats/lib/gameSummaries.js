@@ -15,6 +15,8 @@ Meteor.methods({
         	session: sessionName,
             date: new Date(),
             team: teamName,
+            quafflePlayers: {},
+            snitchPlayers: {},
             players: roster
         });
         return true;
@@ -24,7 +26,7 @@ Meteor.methods({
       Deletes all documents in GameSummaries collection
     ===================================================*/
     clearCollection: function() {
-        GameSummaries.remove({});
+        //GameSummaries.remove({});
     },
 
     findGame: function(sName) {

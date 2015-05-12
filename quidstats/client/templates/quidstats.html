@@ -1,17 +1,10 @@
 <template name="quidstats">
-    <head>
-        <title>QuidStats</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    </head>
-
-    <body>
     {{> goToSummary}}
     <!-- Session Name, not team name. dis gotta be changed -->
     <h1 id="sessionName">{{teamname}}</h1>
 
     {{> quafflePlayers}}
     {{> snitchPlayers}}
-    </body>
 
 </template>
 
@@ -21,8 +14,18 @@
         <!-- for each quaffle player in db, display -->
         <!-- previously buttons were of class "increment" but idk if we need that still -->
 
+        <div id="quafflePlayerList">
+          {{#each quafflePlayers}}
+            {{> displayQuafflePlayers}}
+          {{/each}}
+        </div>
+
     </div>
     {{> addNewQuafflePlayer}}
+</template>
+
+<template name="displayQuafflePlayers">
+
 </template>
 
 <template name="snitchPlayers">
