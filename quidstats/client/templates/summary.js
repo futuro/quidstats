@@ -5,10 +5,12 @@ Template.exportSummaryData.events({
 });
 
 Template.summary.helpers({
-    players: function () {
-        var currentGameId = Session.get("currGameId");
-        var game = GameSummaries.findOne({ _id : currentGameId});
-        return
+	// this isn't being used atm
+    playerList: function () {
+        // We can use subscriptions if we want to split client and server
+        // apart
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({_id:gameid}, {fields: {players:1}});
     },
 
     teamName: function () {
