@@ -3,6 +3,45 @@ button {
 	display: inline-block;
 }
 
+button.addQuafflePlayer {
+	background-color: #908b9f;
+	border: #908b9f;
+}
+
+button.addQuafflePlayer:hover {
+	background-color: #817d90;
+	border: #817d90;
+}
+
+button.addSnitchPlayer {
+	background-color: #908b9f;
+	border: #908b9f;
+}
+
+button.addSnitchPlayer:hover {
+	background-color: #817d90;
+	border: #817d90;
+}
+
+button.quafflePnt {
+
+}
+
+button.snitchPnt {
+	background-color: #c3a60c;
+	border: #c3a60c;
+}
+
+button.snitchPnt:focus {
+	background-color: #c3a60c;
+	border: #c3a60c;
+}
+
+button.snitchPnt:hover {
+	background-color: #a38a03;
+	border: #a38a03;
+}
+
 div {
 	height: auto;
 }
@@ -43,7 +82,12 @@ p {
 
 .player {
 	margin: 4px 0px;
+	max-width: 300px;
 	width: 100%;
+}
+
+.playerName {
+	width: 140px;
 }
 
 .points {
