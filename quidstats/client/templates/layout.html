@@ -35,6 +35,9 @@
 </template>
 
 <template name='navItems'>
+    <li class="{{activeIfTemplateIs 'quidstats'}}">
+        <a href="{{pathFor 'quidstats'}}">Current Game</a>
+    </li>
     <li class="{{activeIfTemplateIs 'rosters' }}">
         <a href="{{ pathFor 'rosters'}}">Rosters</a>
     </li>

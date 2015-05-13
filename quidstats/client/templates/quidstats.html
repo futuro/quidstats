@@ -67,3 +67,20 @@
 <template name="goToSummary">
     <a href="{{pathFor route='summary'}}" class="save_end">Save + End</a>
 </template>
+
+<template name="playerSelect">
+    {{type}}
+    <div id="players">
+        <h3>Some Players</h3>
+        <div class="btn-group-vertical" role="group" aria-label="...">
+            {{#each playersList}}
+              {{#each players}}
+                  <button type="button" class="btn btn-default playerName {{type}}" id="{{playerName}}">
+                    {{playerName}}
+                  </button>
+              {{else}}
+              {{/each}}
+            {{/each}}
+        </div>
+    </div>
+</template>
