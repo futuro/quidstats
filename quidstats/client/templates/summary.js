@@ -24,5 +24,8 @@ Template.summary.helpers({
 
     teamName: function () {
         return Session.get('teamName');
+    },
+    sessionName: function () {
+        return GameSummaries.findOne({_id: Session.get('currGameId')}).session;
     }
 });
