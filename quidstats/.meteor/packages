@@ -10,3 +10,5 @@ insecure
 iron:router
 twbs:bootstrap
 mizzao:bootboxjs
+harrison:papa-parse
+pfafman:filesaver

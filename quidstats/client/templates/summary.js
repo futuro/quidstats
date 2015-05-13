@@ -1,6 +1,15 @@
 Template.exportSummaryData.events({
 	'click #exportData': function () {
-		// send data somewhere
+		var gameid = Session.get('currGameId'),
+            game = GameSummaries.findOne({_id:gameid}),
+            results = game.players,
+            csv = Papa.unparse(results),
+            spaces=/ /g,
+            colons=/:/g,
+            filename = game.session.replace(spaces,'_').replace(colons,'-') + '.csv',
+            blob = new Blob([csv], {type: "text/plain;charset=utf-8"});
+
+        saveAs(blob, filename);
 	}
 });
 
