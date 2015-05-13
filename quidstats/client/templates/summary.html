@@ -1,13 +1,15 @@
 <template name="summary">
 	<h2>Stats Summary for {{team}} on {{date}}</h2>
 	<ul class="list-group">
-		{{#each games team}}
-		<li class="list-group-item">
-			{{name}}
-			<span class="badge quaffleBadge">{{quafflePoints}}</span>
-			<span class="badge snitchBadge">{{snitchGrabs}}</span>
-		</li>
-		{{/each}}
+		{{#each playerList}}
+          {{#each players}}
+              <li class="list-group-item">
+                {{playerName}}
+                  <span class="badge quaffleBadge">{{quafflePoints}}</span>
+                  <span class="badge snitchBadge">{{snitchPoints}}</span>
+              </li>
+          {{/each}}
+        {{/each}}
 	</ul>
 	{{> exportSummaryData}}
 </template>
