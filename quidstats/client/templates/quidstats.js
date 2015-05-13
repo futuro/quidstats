@@ -56,25 +56,22 @@ Template.snitchPlayers.events({
  ==============================================*/
 Template.addNewQuafflePlayer.events({
     'click .addQuafflePlayer': function () {
-        //var name = prompt("New Player Name: "),
-        //    gameid = Session.get('currGameId');
-        //Meteor.call('addQuafflePlayer', gameid, name);
-        BootstrapModalPrompt.prompt({
-            btnDismissText: 'Cancel',
-            btnOkText: false,
-            title: 'Select a player to add',
-            template: Template.playerSelect,
-            templateData: {
-                type: 'quaffle'
-            }
-        })
+        Session.set('currPlayerType', 'quaffle');
+        playerPrompt();
     }
 });
 
 Template.playerSelect.events({
     'click .playerName': function (e) {
-        //Meteor.call('add');
-        console.log(e);
+        var name = e.currentTarget.attributes.id.value,
+            gameid = Session.get('currGameId'),
+            playerType = Session.get('currPlayerType');
+        if (playerType === 'quaffle') {
+            Meteor.call('addQuafflePlayer', gameid, name);
+        } else if (playerType === 'snitch'){
+            Meteor.call('addSnitchPlayer', gameid, name);
+        }
+        Session.set('currPlayerType', '');
         $('.modal').modal('hide');
     }
 });
@@ -86,13 +83,20 @@ Template.playerSelect.helpers({
     }
 });
 
+function playerPrompt() {
+    BootstrapModalPrompt.prompt({
+        btnDismissText: 'Cancel',
+        btnOkText: false,
+        title: 'Select a player to add',
+        template: Template.playerSelect
+    })
+}
 /*=============================================
  Add New Snitch Player
  ==============================================*/
 Template.addNewSnitchPlayer.events({
     'click .addSnitchPlayer': function () {
-        var name = prompt("New Player Name: "),
-            gameid = Session.get('currGameId');
-        Meteor.call('addSnitchPlayer', gameid, name);
+        Session.set('currPlayerType', 'snitch');
+        playerPrompt();
     }
 });
