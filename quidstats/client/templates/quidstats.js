@@ -45,9 +45,9 @@ Template.quafflePlayers.events({
  ==============================================*/
 Template.snitchPlayers.events({
     'click .snitchPnt': function (e) {
-        // TODO: might be a better/more secure way to get the player name
-        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
-        incrementPlayer(name, "snitch");
+        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML,
+            gameid = Session.get('currGameId');
+        Meteor.call('incSnitchPlayer', gameid, name);
     }
 });
 
