@@ -8,10 +8,11 @@ Template.getsession.helpers({
 
 Template.getsession.events({
     'click #newgame': function () {
-      var sessionName = document.querySelector('#sessionInput').value;
-      var teamName = Session.get("teamName"); // change to Session.get("currTeamName");
-      var date = new Date();
-      Meteor.call('createGame', sessionName, teamName, date,
+
+        var sessionName = document.querySelector('#sessionInput').value;
+        var teamName = Session.get("teamName");
+        var date = new Date();
+        Meteor.call('createGame', sessionName, teamName, date,
             function (error, result) {
                 if (error) {
                     console.log(error);
@@ -20,7 +21,7 @@ Template.getsession.events({
                     Session.set('currGameId', result);
                 }
             }
-      );
-      Router.go('quidstats');
+        );
+        Router.go('quidstats');
     }
 });

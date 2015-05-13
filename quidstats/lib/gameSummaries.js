@@ -20,18 +20,18 @@ Meteor.methods({
         });
         return id;
     },
-    addQuafflePlayer: function(seshid, playername){
-        GameSummaries.update({_id: seshid},
+    addQuafflePlayer: function(gameid, playername){
+        GameSummaries.update({_id: gameid},
             {$addToSet: {quafflePlayers: {name: playername, score: 0}}});
     },
-    addSnitchPlayer: function(seshid, playername){
-        GameSummaries.update({_id: seshid},
+    addSnitchPlayer: function(gameid, playername){
+        GameSummaries.update({_id: gameid},
             {$addToSet: {snitchPlayers: {name: playername, score: 0}}});
     },
-    //incQuafflePlayer: function (seshid, name) {
-    //    GameSummaries.update(({_id: seshid},
-    //    {$inc: {quafflePlayers.name}}))
-    //},
+    incQuafflePlayer: function (gameid, name) {
+        GameSummaries.update({$and:[{_id: gameid},{'quafflePlayers.name':name}]},
+            {$inc: {'quafflePlayers.$.score':10}});
+    },
 
     /*==================================================
       Deletes all documents in GameSummaries collection
