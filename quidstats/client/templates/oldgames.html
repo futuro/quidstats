@@ -1,10 +1,18 @@
 <template name="oldgames">
+    <h1>Pick a game</h1>
+    <div class="games">
+        <ul class="nav nav-pills nav-stacked">
+          {{#each games}}
+            {{> oldGamesList}}
+          {{/each}}
+        </ul>
+    </div>
+</template>
 
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Stats from Games Past</title>
-</head>
-    <body>
-    Wooooahhhh stats!
-    </body>
+<template name="oldGamesList">
+    <li>
+        <a href="{{pathFor route='summary'}}" class="oldGame" id="{{_id}}">
+          {{session}}
+        </a>
+    </li>
 </template>
