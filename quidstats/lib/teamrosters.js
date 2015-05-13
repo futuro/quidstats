@@ -13,7 +13,7 @@ Meteor.methods({
     insertPlayer: function (teamname, player) {
         check(teamname, String);
         check(player, String);
-        Teamrosters.update({name: teamname}, {$addToSet: {players: {playername: player}}});
+        Teamrosters.update({name: teamname}, {$addToSet: {players: {playerName: player}}});
     },
     getTeams: function () {
         return Teamrosters.find();

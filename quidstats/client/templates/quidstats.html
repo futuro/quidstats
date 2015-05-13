@@ -11,7 +11,7 @@
         <h3>Quaffle Points</h3>
         <div id="quafflePlayerList">
           {{#each quafflePlayersList}}
-            {{#each quafflePlayers}}
+            {{#each players}}
               {{> displayQuafflePlayer}}
             {{else}}
             {{/each}}
@@ -22,11 +22,13 @@
 </template>
 
 <template name="displayQuafflePlayer">
-    <div class="player">
-        <p class="name">{{name}}</p>
-        <button class="btn btn-primary quafflePnt">+10</button>
-        <p class="score">{{score}}</p>
-    </div>
+    {{#if displayQuaffle}}
+        <div class="player">
+            <p class="playerName">{{playerName}}</p>
+            <button class="btn btn-primary quafflePnt" id="{{playerName}}">+10</button>
+            <p class="quafflePoints">{{quafflePoints}}</p>
+        </div>
+    {{/if}}
 </template>
 
 <template name="snitchPlayers">
@@ -34,7 +36,7 @@
         <h3>Snitch Grabs</h3>
         <div id="snitchPlayerList">
           {{#each snitchPlayersList}}
-            {{#each snitchPlayers}}
+            {{#each players}}
               {{> displaySnitchPlayer}}
             {{else}}
             {{/each}}
@@ -45,11 +47,13 @@
 </template>
 
 <template name="displaySnitchPlayer">
-    <div class="player">
-        <p class="name">{{name}}</p>
-        <button class="btn btn-primary snitchPnt">+30</button>
-        <p class="score">{{score}}</p>
-    </div>
+    {{#if displaySnitch}}
+        <div class="player">
+            <p class="playerName">{{playerName}}</p>
+            <button class="btn btn-primary snitchPnt" id="{{playerName}}">+30</button>
+            <p class="snitchPoint">{{snitchPoints}}</p>
+        </div>
+    {{/if}}
 </template>
 
 <template name="addNewQuafflePlayer">

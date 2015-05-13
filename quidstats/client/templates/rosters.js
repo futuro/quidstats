@@ -30,8 +30,8 @@ Template.teamroster.helpers({
 
 Template.teamroster.events({
     'submit .new-players': function (event) {
-        var playername = event.target.text.value;
-        Meteor.call('insertPlayer', this.name, playername);
+        var playerName = event.target.text.value;
+        Meteor.call('insertPlayer', this.name, playerName);
         event.target.text.value = '';
         return false;
     }
