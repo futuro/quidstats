@@ -1,4 +1,5 @@
 
+
 Template.quafflePlayers.helpers({
     quafflePlayersList: function(){
         var gameid = Session.get('currGameId');
@@ -20,6 +21,8 @@ Template.quidstats.helpers({
         return gameid;
     }
 });
+
+
 
 /*=============================================
  Increment Quaffle Points
@@ -65,106 +68,3 @@ Template.addNewSnitchPlayer.events({
         Meteor.call('addSnitchPlayer', gameid, name);
     }
 });
-
-
-if (Meteor.isClient) {
-
-  /*=============================================
-    Player Object Constructors
-    - prolly don't need this shit?
-  ==============================================*/
-  function Player(name) {
-    this.name = name;
-    this.quafflePoints = 0;
-    this.snitchGrabs = 0;
-    this.quaffleDisplay = false;
-    this.snitchDisplay = false;
-  }
-
-  function Player(name, ball) {
-    this.name = name;
-    this.quafflePoints = 0;
-    this.snitchGrabs = 0;
-    this.quaffleDisplay = false;
-    this.snitchDisplay = false;
-
-    if (ball == "snitch") {
-      this.snitchDisplay = true;
-    }
-    else if (ball == "quaffle") {
-      this.quaffleDisplay = true;
-    }
-  }
-
-
-  /*=============================================
-    Go To Summary Page
-  ==============================================*/
-
-  Template.goToSummary.helpers({
-    redirectToSummary: function(a) {
-      // TODO: update this shit somehow
-      Meteor.call('clearCollection');
-      Meteor.call('createGame', a, a, playerList);
-    }
-
-  });
-
-  /*=============================================
-    FUNCTIONS
-  ==============================================*/
-  function newPlayer(name, ball) {
-    // if user presses "cancel" on name entry
-    if (name == null) {
-      return;
-    }
-
-    // TODO:
-    // if player name ! in db, add them
-    // else tell user they're a dumbass
-  }
-
-  function incrementPlayer(name, ball) {
-    // TODO:
-    // increment user stat (of ball) in db
-  }
-
-  function displayQuafflePlayers() {
-    // document.getElementById("quafflePlayerList").innerHTML = ""; // this didn't work, maybe
-    // remove all names (fresh start)
-    var div = document.getElementById("quafflePlayerList");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    playerList.forEach(function(entry) {
-      if (entry.quaffleDisplay) {
-        var elem = document.createElement("div");
-        elem.className = "player";
-        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
-                        + quaffleIncrement 
-                        + "<p class=\"points\">" +entry.quafflePoints; + "</p>";
-        document.getElementById("quafflePlayerList").appendChild(elem);
-      }
-    });
-  }
-
-  function displaySnitchPlayers() {
-    // document.getElementById("snitchPlayerList").innerHTML = "";
-    var div = document.getElementById("snitchPlayerList");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    playerList.forEach(function(entry) {
-      if (entry.snitchDisplay) {
-        var elem = document.createElement("div");
-        elem.className = "player";
-        elem.innerHTML = "<p class=\"name\">" + entry.name + "</p>" 
-                        + snitchIncrement 
-                        + "<p class=\"points\">" +entry.snitchGrabs; + "</p>";
-        document.getElementById("snitchPlayerList").appendChild(elem);
-      }
-    });
-  }
-}

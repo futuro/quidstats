@@ -37,7 +37,7 @@ Meteor.methods({
       Deletes all documents in GameSummaries collection
     ===================================================*/
     clearCollection: function() {
-        //GameSummaries.remove({});
+        GameSummaries.remove({});
     },
 
     findGame: function(sName) {
