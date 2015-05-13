@@ -11,5 +11,9 @@ Template.summary.helpers({
         // apart
         var gameid = Session.get('currGameId');
         return GameSummaries.find({_id:gameid}, {fields: {players:1}});
+    },
+
+    teamName: function () {
+        return Session.get('teamName');
     }
 });

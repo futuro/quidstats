@@ -56,9 +56,21 @@ Template.snitchPlayers.events({
  ==============================================*/
 Template.addNewQuafflePlayer.events({
     'click .addQuafflePlayer': function () {
-        var name = prompt("New Player Name: "),
-            gameid = Session.get('currGameId');
-        Meteor.call('addQuafflePlayer', gameid, name);
+        //var teamName = Session.get('teamName');
+        //console.log("teamName = ", teamName);
+        //var team = Teamrosters.findOne({name : teamName});
+        //console.log("team = ", team);
+        //var roster = team.players;//game.players;
+        //console.log("roster = ", roster);
+        //bootbox.dialog({
+        //    title: "Add New Player",
+        //    message: "List of Players"
+        //});
+
+
+         var name = prompt("New Player Name: "),
+             gameid = Session.get('currGameId');
+         Meteor.call('addQuafflePlayer', gameid, name);
     }
 });
 

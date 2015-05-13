@@ -1,5 +1,5 @@
 <template name="summary">
-	<h2>Stats Summary for {{team}} on {{date}}</h2>
+	<h2>Stats Summary for {{teamName}} on {{date}}</h2>
 	<ul class="list-group">
 		{{#each playerList}}
           {{#each players}}
@@ -10,6 +10,7 @@
               </li>
           {{/each}}
         {{/each}}
+
 	</ul>
 	{{> exportSummaryData}}
 </template>
