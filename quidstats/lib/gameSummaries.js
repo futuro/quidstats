@@ -43,10 +43,5 @@ Meteor.methods({
     clearCollections: function() {
         GameSummaries.remove({});
         Teamrosters.remove({});
-    },
-
-    findGame: function(sName) {
-        var game = GameSummaries.findOne();
-        return game;
     }
 });
