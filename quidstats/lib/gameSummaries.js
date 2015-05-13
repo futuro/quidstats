@@ -13,7 +13,7 @@ Meteor.methods({
 
         var id = GameSummaries.insert({
             session: sessionName,
-            date: new Date(),
+            date: date,
             team: teamName,
             quafflePlayers: [],
             snitchPlayers: []

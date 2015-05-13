@@ -19,6 +19,10 @@ Template.quidstats.helpers({
         var gameid = Session.get('currGameId');
         console.log(gameid);
         return gameid;
+    },
+
+    teamName: function() {
+        return Session.get('teamName');
     }
 });
 

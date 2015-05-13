@@ -8,6 +8,7 @@ Template.getsession.helpers({
 
 Template.getsession.events({
     'click #newgame': function () {
+
         var sessionName = document.querySelector('#sessionInput').value;
         var teamName = Session.get("teamName");
         var date = new Date();
