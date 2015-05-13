@@ -8,7 +8,6 @@ Template.pickteam.helpers({
 
 Template.newgamelist.events({
     'click .newgame': function (event) {
-        console.log(event);
         Session.set('teamName', event.target.textContent.trim());
     }
 });
