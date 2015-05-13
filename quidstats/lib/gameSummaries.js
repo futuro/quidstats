@@ -32,6 +32,10 @@ Meteor.methods({
         GameSummaries.update({$and:[{_id: gameid},{'quafflePlayers.name':name}]},
             {$inc: {'quafflePlayers.$.score':10}});
     },
+    incSnitchPlayer: function (gameid, name) {
+        GameSummaries.update({$and:[{_id: gameid},{'snitchPlayers.name':name}]},
+            {$inc: {'snitchPlayers.$.score':30}});
+    },
 
     /*==================================================
       Deletes all documents in GameSummaries collection
