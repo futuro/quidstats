@@ -5,26 +5,72 @@
 // Games = new Mongo.Collection("games");
 
 Template.quafflePlayers.helpers({
-    quafflePlayers: function(){
-        var seshid = Session.get('currSeshId');
-        return GameSummaries.find({"_id":seshid}, {fields: {quafflePlayers:1}});
+    quafflePlayersList: function(){
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({"_id":gameid}, {fields: {quafflePlayers:1}});
     }
 });
 
 Template.snitchPlayers.helpers({
-    snitchPlayers: function () {
-        var seshid = Session.get('currSeshId');
-        return GameSummaries.find({"_id":seshid}, {fields: {snitchPlayers:1}});
+    snitchPlayersList: function () {
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({"_id":gameid}, {fields: {snitchPlayers:1}});
     }
 });
 
 Template.quidstats.helpers({
     printsesh: function () {
-        var seshid = Session.get('currSeshId');
-        console.log(seshid);
-        return seshid;
+        var gameid = Session.get('currGameId');
+        console.log(gameid);
+        return gameid;
     }
 });
+
+/*=============================================
+ Increment Quaffle Points
+ ==============================================*/
+Template.quafflePlayers.events({
+    'click .quafflePnt': function (e) {
+        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML,
+            gameid = Session.get('currGameId');
+        Meteor.call('incQuafflePlayer', gameid, name);
+    }
+});
+
+
+/*=============================================
+ Increment Snitch Grabs
+ ==============================================*/
+Template.snitchPlayers.events({
+    'click .snitchPnt': function (e) {
+        // TODO: might be a better/more secure way to get the player name
+        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
+        incrementPlayer(name, "snitch");
+    }
+});
+
+/*=============================================
+ Add New Quaffle Player
+ ==============================================*/
+Template.addNewQuafflePlayer.events({
+    'click .addQuafflePlayer': function () {
+        var name = prompt("New Player Name: "),
+            gameid = Session.get('currGameId');
+        Meteor.call('addQuafflePlayer', gameid, name);
+    }
+});
+
+/*=============================================
+ Add New Snitch Player
+ ==============================================*/
+Template.addNewSnitchPlayer.events({
+    'click .addSnitchPlayer': function () {
+        var name = prompt("New Player Name: "),
+            gameid = Session.get('currGameId');
+        Meteor.call('addSnitchPlayer', gameid, name);
+    }
+});
+
 
 if (Meteor.isClient) {
 
@@ -55,25 +101,6 @@ if (Meteor.isClient) {
     }
   }
 
-  /*=============================================
-    Add New Quaffle Player
-  ==============================================*/
-  Template.addNewQuafflePlayer.events({
-    'click .addQuafflePlayer': function () {
-      var name = prompt("New Player Name: ");
-      newPlayer(name, "quaffle");
-    }
-  });
-
-  /*=============================================
-    Add New Snitch Player
-  ==============================================*/
-  Template.addNewSnitchPlayer.events({
-    'click .addSnitchPlayer': function () {
-      var name = prompt("New Player Name: ");
-      newPlayer(name, "snitch");
-    }
-  });
 
   /*=============================================
     Go To Summary Page
@@ -86,29 +113,6 @@ if (Meteor.isClient) {
       Meteor.call('createGame', a, a, playerList);
     }
 
-  });
-
-  /*=============================================
-    Increment Quaffle Points
-  ==============================================*/
-  Template.quafflePlayers.events({
-    'click .increment': function (e) {
-      // TODO: might be a better/more secure way to get the player name
-      var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
-      incrementPlayer(name, "quaffle");
-    }
-  });
-
-
-  /*=============================================
-    Increment Snitch Grabs
-  ==============================================*/
-  Template.snitchPlayers.events({
-    'click .increment': function (e) {
-      // TODO: might be a better/more secure way to get the player name
-      var name = e.currentTarget.parentNode.querySelector('.name').innerHTML;
-      incrementPlayer(name, "snitch");
-    }
   });
 
   /*=============================================

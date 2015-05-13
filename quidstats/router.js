@@ -7,6 +7,7 @@ Router.configure({
 });
 
 Router.map(function (){
+    this.route('getsession');
     this.route('home', {path: '/'});
     this.route('pickteam');
     this.route('quidstats');
@@ -31,6 +32,13 @@ Router.map(function (){
         this.render('quidstats', {
             data: {
                 teamname : this.params._teamname
+            }
+        })
+    });
+    this.route('getsession/:_teamName', function () {
+        this.render('getsession', {
+            data: {
+                teamName : this.params._teamName
             }
         })
     });

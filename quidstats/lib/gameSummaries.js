@@ -5,7 +5,7 @@ Meteor.methods({
     /*=================================================
       Adds a new "Game" to the GameSummaries database
     ==================================================*/
-	createGame: function (sessionName, teamName, roster) {
+	createGame: function (sessionName, teamName, date) {
         // if (GameSummaries.findOne({session: {$eq: sessionName}})) {
         //     prompt("A session with that name already exists! Please enter a new name: ");
         //     return false;
@@ -16,15 +16,22 @@ Meteor.methods({
             date: new Date(),
             team: teamName,
             quafflePlayers: [],
-            snitchPlayers: [],
-            players: roster
+            snitchPlayers: []
         });
         return id;
     },
-    addQuafflePlayer: function(sessionname, playername){
-        GameSummaries.update({session: sessionname},
+    addQuafflePlayer: function(seshid, playername){
+        GameSummaries.update({_id: seshid},
             {$addToSet: {quafflePlayers: {name: playername, score: 0}}});
     },
+    addSnitchPlayer: function(seshid, playername){
+        GameSummaries.update({_id: seshid},
+            {$addToSet: {snitchPlayers: {name: playername, score: 0}}});
+    },
+    //incQuafflePlayer: function (seshid, name) {
+    //    GameSummaries.update(({_id: seshid},
+    //    {$inc: {quafflePlayers.name}}))
+    //},
 
     /*==================================================
       Deletes all documents in GameSummaries collection
