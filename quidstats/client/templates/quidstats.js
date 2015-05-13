@@ -56,21 +56,33 @@ Template.snitchPlayers.events({
  ==============================================*/
 Template.addNewQuafflePlayer.events({
     'click .addQuafflePlayer': function () {
-        //var teamName = Session.get('teamName');
-        //console.log("teamName = ", teamName);
-        //var team = Teamrosters.findOne({name : teamName});
-        //console.log("team = ", team);
-        //var roster = team.players;//game.players;
-        //console.log("roster = ", roster);
-        //bootbox.dialog({
-        //    title: "Add New Player",
-        //    message: "List of Players"
-        //});
+        //var name = prompt("New Player Name: "),
+        //    gameid = Session.get('currGameId');
+        //Meteor.call('addQuafflePlayer', gameid, name);
+        BootstrapModalPrompt.prompt({
+            btnDismissText: 'Cancel',
+            btnOkText: false,
+            title: 'Select a player to add',
+            template: Template.playerSelect,
+            templateData: {
+                type: 'quaffle'
+            }
+        })
+    }
+});
 
+Template.playerSelect.events({
+    'click .playerName': function (e) {
+        //Meteor.call('add');
+        console.log(e);
+        $('.modal').modal('hide');
+    }
+});
 
-         var name = prompt("New Player Name: "),
-             gameid = Session.get('currGameId');
-         Meteor.call('addQuafflePlayer', gameid, name);
+Template.playerSelect.helpers({
+    playersList: function(){
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({"_id":gameid}, {fields: {players:1}});
     }
 });
 
