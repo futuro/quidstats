@@ -21,10 +21,18 @@ Meteor.methods({
         });
         return id;
     },
-    addQuafflePlayer: function(sessionname, playername){
-        GameSummaries.update({session: sessionname},
+    addQuafflePlayer: function(seshid, playername){
+        GameSummaries.update({_id: seshid},
             {$addToSet: {quafflePlayers: {name: playername, score: 0}}});
     },
+    addSnitchPlayer: function(seshid, playername){
+        GameSummaries.update({_id: seshid},
+            {$addToSet: {snitchPlayers: {name: playername, score: 0}}});
+    },
+    //incQuafflePlayer: function (seshid, name) {
+    //    GameSummaries.update(({_id: seshid},
+    //    {$inc: {quafflePlayers.name}}))
+    //},
 
     /*==================================================
       Deletes all documents in GameSummaries collection
