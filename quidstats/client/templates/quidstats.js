@@ -6,23 +6,23 @@
 
 Template.quafflePlayers.helpers({
     quafflePlayersList: function(){
-        var seshid = Session.get('currSeshId');
-        return GameSummaries.find({"_id":seshid}, {fields: {quafflePlayers:1}});
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({"_id":gameid}, {fields: {quafflePlayers:1}});
     }
 });
 
 Template.snitchPlayers.helpers({
     snitchPlayersList: function () {
-        var seshid = Session.get('currSeshId');
-        return GameSummaries.find({"_id":seshid}, {fields: {snitchPlayers:1}});
+        var gameid = Session.get('currGameId');
+        return GameSummaries.find({"_id":gameid}, {fields: {snitchPlayers:1}});
     }
 });
 
 Template.quidstats.helpers({
     printsesh: function () {
-        var seshid = Session.get('currSeshId');
-        console.log(seshid);
-        return seshid;
+        var gameid = Session.get('currGameId');
+        console.log(gameid);
+        return gameid;
     }
 });
 
@@ -32,8 +32,8 @@ Template.quidstats.helpers({
 Template.quafflePlayers.events({
     'click .quafflePnt': function (e) {
         var name = e.currentTarget.parentNode.querySelector('.name').innerHTML,
-            seshid = Session.get('currSeshId');
-        Meteor.call('incQuafflePlayer', seshid, name);
+            gameid = Session.get('currGameId');
+        Meteor.call('incQuafflePlayer', gameid, name);
     }
 });
 
@@ -55,8 +55,8 @@ Template.snitchPlayers.events({
 Template.addNewQuafflePlayer.events({
     'click .addQuafflePlayer': function () {
         var name = prompt("New Player Name: "),
-            seshid = Session.get('currSeshId');
-        Meteor.call('addQuafflePlayer', seshid, name);
+            gameid = Session.get('currGameId');
+        Meteor.call('addQuafflePlayer', gameid, name);
     }
 });
 
@@ -66,8 +66,8 @@ Template.addNewQuafflePlayer.events({
 Template.addNewSnitchPlayer.events({
     'click .addSnitchPlayer': function () {
         var name = prompt("New Player Name: "),
-            seshid = Session.get('currSeshId');
-        Meteor.call('addSnitchPlayer', seshid, name);
+            gameid = Session.get('currGameId');
+        Meteor.call('addSnitchPlayer', gameid, name);
     }
 });
 
