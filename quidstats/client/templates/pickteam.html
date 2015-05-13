@@ -5,6 +5,7 @@
           {{#each teams}}
             {{> newgamelist}}
           {{/each}}
+          {{> newTeam}}
         </ul>
     </div>
 </template>
@@ -13,6 +14,14 @@
     <li>
         <a href="{{pathFor route='getsession'}}/{{name}}" class="newgame">
           {{name}}
+        </a>
+    </li>
+</template>
+
+<template name="newTeam">
+    <li>
+        <a href="{{pathFor route='getsession'}}/Guest Session" class="newgame">
+          Start without picking a team!
         </a>
     </li>
 </template>
