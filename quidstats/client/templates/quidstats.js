@@ -1,8 +1,3 @@
-// Teams db has "name" : [players]
-// Teams = new Mongo.Collection("teams");
-// Games has date : <date>,  team : <string>
-// players : {playerName : {quaffle : <int>, snitch: <int>}, playerName: {..}}}
-// Games = new Mongo.Collection("games");
 
 Template.quafflePlayers.helpers({
     quafflePlayersList: function(){
