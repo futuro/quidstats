@@ -6,35 +6,36 @@ Meteor.methods({
       Adds a new "Game" to the GameSummaries database
     ==================================================*/
 	createGame: function (sessionName, teamName, date) {
-        // if (GameSummaries.findOne({session: {$eq: sessionName}})) {
-        //     prompt("A session with that name already exists! Please enter a new name: ");
-        //     return false;
-        // }
-
+        var roster = Teamrosters.findOne({name:teamName}, {fields:{players:1}}).players;
+        var extPlayer = function(player){
+            return _.extend(
+                {quafflePoints:0, displayQuaffle:false, snitchPoints:0, displaySnitch:false},
+                player)
+        };
+        var players = _.map(roster, extPlayer);
         var id = GameSummaries.insert({
             session: sessionName,
             date: date,
             team: teamName,
-            quafflePlayers: [],
-            snitchPlayers: []
+            players: players
         });
         return id;
     },
-    addQuafflePlayer: function(gameid, playername){
-        GameSummaries.update({_id: gameid},
-            {$addToSet: {quafflePlayers: {name: playername, score: 0}}});
+    addQuafflePlayer: function(gameid, playerName){
+        GameSummaries.update({$and:[{_id: gameid},{'players.playerName':playerName}]},
+            {$set: {'players.$.displayQuaffle': true}});
     },
-    addSnitchPlayer: function(gameid, playername){
-        GameSummaries.update({_id: gameid},
-            {$addToSet: {snitchPlayers: {name: playername, score: 0}}});
+    addSnitchPlayer: function(gameid, playerName){
+        GameSummaries.update({$and:[{_id: gameid},{'players.playerName':playerName}]},
+            {$set: {'players.$.displaySnitch': true}});
     },
     incQuafflePlayer: function (gameid, name) {
-        GameSummaries.update({$and:[{_id: gameid},{'quafflePlayers.name':name}]},
-            {$inc: {'quafflePlayers.$.score':10}});
+        GameSummaries.update({$and:[{_id: gameid},{'players.playerName':name}]},
+            {$inc: {'players.$.quafflePoints':10}});
     },
     incSnitchPlayer: function (gameid, name) {
-        GameSummaries.update({$and:[{_id: gameid},{'snitchPlayers.name':name}]},
-            {$inc: {'snitchPlayers.$.score':30}});
+        GameSummaries.update({$and:[{_id: gameid},{'players.playerName':name}]},
+            {$inc: {'players.$.snitchPoints':30}});
     },
 
     /*==================================================

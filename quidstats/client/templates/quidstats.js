@@ -1,16 +1,16 @@
 
-
+// These could be consolidated into a general template helper function
 Template.quafflePlayers.helpers({
     quafflePlayersList: function(){
         var gameid = Session.get('currGameId');
-        return GameSummaries.find({"_id":gameid}, {fields: {quafflePlayers:1}});
+        return GameSummaries.find({"_id":gameid}, {fields: {players:1}});
     }
 });
 
 Template.snitchPlayers.helpers({
     snitchPlayersList: function () {
         var gameid = Session.get('currGameId');
-        return GameSummaries.find({"_id":gameid}, {fields: {snitchPlayers:1}});
+        return GameSummaries.find({"_id":gameid}, {fields: {players:1}});
     }
 });
 
@@ -33,7 +33,7 @@ Template.quidstats.helpers({
  ==============================================*/
 Template.quafflePlayers.events({
     'click .quafflePnt': function (e) {
-        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML,
+        var name = e.currentTarget.attributes.id.value,
             gameid = Session.get('currGameId');
         Meteor.call('incQuafflePlayer', gameid, name);
     }
@@ -45,7 +45,7 @@ Template.quafflePlayers.events({
  ==============================================*/
 Template.snitchPlayers.events({
     'click .snitchPnt': function (e) {
-        var name = e.currentTarget.parentNode.querySelector('.name').innerHTML,
+        var name = e.currentTarget.attributes.id.value,
             gameid = Session.get('currGameId');
         Meteor.call('incSnitchPlayer', gameid, name);
     }
