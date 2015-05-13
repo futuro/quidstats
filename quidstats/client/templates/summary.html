@@ -1,17 +1,32 @@
 <template name="summary">
 	<h2>Stats Summary for {{sessionName}}</h2>
-	<ul class="list-group">
-		{{#each playerList}}
-          {{#each players}}
-              <li class="list-group-item">
-                {{playerName}}
-                  <span class="badge quaffleBadge">{{quafflePoints}}</span>
-                  <span class="badge snitchBadge">{{snitchPoints}}</span>
-              </li>
-          {{/each}}
-        {{/each}}
 
-	</ul>
+  <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Player Statistics</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quaffle Points</th>
+        <th>Snitch Points</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each playerList}}
+      {{#each players}}
+        <tr>
+          <td>{{playerName}}</td>
+          <td>{{quafflePoints}}</td>
+          <td>{{snitchPoints}}</td>
+        </tr>
+      {{/each}}
+    {{/each}}
+  </tbody>
+  </table>
+</div>
 	{{> exportSummaryData}}
 </template>
 
